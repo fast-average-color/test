@@ -1,0 +1,56 @@
+<html>
+<head>
+    <script src="https://unpkg.com/fast-average-color/dist/index.browser.min.js"></script>
+</head>
+<body>
+    ...
+    <section class='info'>
+        <article class='article'> 
+            <div class='img'>
+                <img width="600" src="1.png" />
+            </div>
+            <div class='text'>
+                <p>
+                    Text 1
+                </p>
+            </div>    
+        </article>
+          <article class='article'> 
+            <div class='img'>
+              <img width="600" src="2.png" />
+            </div>
+          <div class='text'>
+            <p>
+                Text 2
+            </p>
+          </div>    
+        </article>
+        <article class='article'> 
+            <div class='img'>
+              <img width="600" src="3.png" />
+            </div>
+          <div class='text'>
+            <p>
+                Text 3
+            </p>
+          </div>    
+        </article>
+  <script>
+        const fac = new FastAverageColor();
+        const articles = document.querySelectorAll('.article');
+
+        articles.forEach(article => {
+            const img = article.querySelector('img');
+            if (img) {
+                fac.getColorAsync(img, { algorithm: 'dominant' })
+                    .then(color => {
+                        article.style.backgroundColor = color.rgb;
+                        article.style.color = color.isDark ? '#fff' : '#000';
+                    })
+                    .catch(e => console.log(e));
+            }
+        });
+    </script>
+</section>
+</body>
+</html>
